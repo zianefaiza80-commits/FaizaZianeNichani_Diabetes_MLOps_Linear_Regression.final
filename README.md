@@ -1,48 +1,152 @@
-# Diabetes MLOps: regresión lineal
+# Diabetes dataset with MLOps and Linear Regression
 
-Proyecto educativo que entrena una regresión lineal con el conjunto Diabetes integrado en scikit-learn, registra métricas y el modelo en MLflow, y expone predicciones mediante FastAPI. Predice una medida cuantitativa de progresión de la enfermedad; no diagnostica diabetes.
+Project Overview
 
-## Requisitos
+This project implements a simple end-to-end Machine Learning Operations (MLOps) workflow using the Diabetes dataset from scikit-learn.
 
-Python 3.10 o posterior.
+The goal is to predict diabetes disease progression using patient-related numerical features and a Linear Regression model.
 
-```bash
-python -m venv .venv
-# Windows: .venv\Scripts\activate
-# macOS/Linux: source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
+The project demonstrates data preparation, model training, evaluation, experiment tracking, model registration, API serving, automated testing, and continuous integration.
 
-## Entrenar y ejecutar
+Project Objectives:
 
-Desde esta carpeta, ejecuta el entrenamiento. Crea `mlflow.db`, registra el modelo `diabetes_model` y asigna el alias `champion`:
+Load and validate the dataset.
+Clean the data and handle missing or invalid values.
+Train a Linear Regression model.
+Evaluate model performance using standard regression metrics.
+Track experiments using MLflow.
+Register the trained model and use the "champion" alias.
+Create a REST API using FastAPI.
+Test API endpoints and error handling.
+Automate tests with GitHub Actions.
 
-```bash
-python train.py
-```
+Dataset
+The project uses the Diabetes dataset provided by scikit-learn.
 
-Después inicia la API:
+The dataset contains numerical patient-related features and a target representing a quantitative measure of disease progression.
 
-```bash
+The model predicts the target value. It does not diagnose diabetes or replace medical advice.
+
+Model and Evaluation
+Selected model: Linear Regression.
+
+The model is evaluated using:
+
+Mean Squared Error (MSE): measures the average squared prediction error. Lower values are better.
+Root Mean Squared Error (RMSE): measures prediction error in the target's units. Lower values are better.
+R² Score: measures how well the model explains variation in the target. Values closer to 1 generally indicate a better fit.
+Actual evaluation results are generated when the notebook is executed.
+
+MLOps Workflow
+
+The project follows these steps:
+
+Data extraction and validation.
+
+Data cleaning and preparation.
+
+Train-test split.
+
+Linear Regression model training.
+
+Model evaluation.
+
+Experiment tracking with MLflow.
+
+Model registration and "champion" alias assignment.
+
+Model loading for prediction.
+
+REST API development with FastAPI.
+
+Automated testing with pytest.
+
+Continuous integration with GitHub Actions.
+
+API Endpoints
+
+The API provides the following endpoints:
+
+Method| Endpoint| Description GET| "/health"| Checks service health and model availability. GET| "/model-info"| Returns information about the loaded model. POST| "/predict"| Receives numerical input features and returns a prediction.
+
+The prediction endpoint expects the ten numerical features used by the scikit-learn Diabetes dataset.
+
+Error Handling and Testing
+
+The project includes tests for:
+
+Successful prediction requests.
+Invalid input data.
+Model or service unavailability.
+Tests are implemented using pytest and FastAPI's TestClient.
+
+Technologies Used
+
+Python
+pandas
+NumPy
+scikit-learn
+MLflow
+FastAPI
+Pydantic
+pytest
+Git and GitHub
+GitHub Actions
+
+Repository Structure
+
+diabetes-mlops/ ├── Proyecto_MLOps_Diabetes_Regresion_Lineal.ipynb ├── Diabetes_MLOps_Linear_Regression.ipynb ├── diabetes.csv ├── api.py ├── test_api.py ├── requirements.txt ├── tests.yml └── README.md
+
+The exact filenames and locations should match the files committed to the repository.
+
+Installation and Execution
+Install the project dependencies:
+
+pip install -r requirements.txt
+
+Run the notebook in Google Colab, executing the cells in order to prepare the data, train and evaluate the model, and register it with MLflow.
+
+After the model has been registered and the required MLflow tracking environment is available, start the API with:
+
 uvicorn api:app --reload
-```
 
-Documentación interactiva: <http://127.0.0.1:8000/docs>. La API acepta diez valores numéricos (`age`, `sex`, `bmi`, `bp`, `s1`…`s6`) en `POST /predict`. `GET /health` comprueba la disponibilidad y `GET /model-info` informa del modelo. Debes ejecutar `train.py` antes de iniciar la API.
+Open the interactive API documentation at:
 
-## Pruebas
+"http://127.0.0.1:8000/docs"
 
-```bash
+Run the automated tests with:
+
 pytest -v
-```
 
-GitHub Actions ejecuta las pruebas en cada push y pull request desde `.github/workflows/tests.yml`.
+These commands assume the required files, dependencies, and MLflow configuration are available in the current environment.
 
-## Archivos
+Continuous Integration
 
-- `train.py`: entrenamiento, métricas y registro en MLflow.
-- `api.py`: servicio FastAPI y validación de entradas.
-- `test_api.py`: pruebas automatizadas.
-- `FaizaZianeNichani_Diabetes_MLOps_Linear_Regression.ipynb`: cuaderno original del proyecto.
-- `.github/workflows/tests.yml`: integración continua.
+GitHub Actions is used to automate testing when changes are pushed to the repository or a pull request is opened.
 
-La base MLflow, los modelos generados y los entornos virtuales se crean localmente y no se incluyen en el proyecto.
+The workflow installs the dependencies and runs the automated tests to help identify errors early.
+
+The workflow file must be located inside ".github/workflows/" for GitHub Actions to detect it automatically.
+
+Limitations and Future Improvements
+
+Possible improvements include:
+
+Adding more robust data validation.
+Comparing Linear Regression with other regression models.
+Improving experiment and model version management.
+Persisting MLflow tracking data and model artifacts.
+Deploying the API to a hosting platform.
+Adding monitoring for prediction latency and model performance.
+
+Conclusion
+
+This project demonstrates the main concepts of an end-to-end MLOps workflow, from data preparation and model training to experiment tracking, API serving, testing, and continuous integration.
+
+It provides an educational foundation for understanding how a machine learning model can be organized and served as part of a software project.
+
+Project type: Educational MLOps project Model: Linear Regression Dataset: scikit-learn Diabetes dataset
+
+
+#########################################################################################################################################################
+
