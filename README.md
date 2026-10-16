@@ -57,7 +57,7 @@ Diabetes_MLOps_Linear_Regression/
 ├── test_api.py                       # API tests
 ├── requirements.txt                  # Python dependencies
 ├── README.md                         # Project documentation
-└── FaizaZianeNichani_Diabetes_MLOps_Linear_Regression.ipynb
+└── FaizaZianeNichani_Diabetes_MLOps_Linear_Regression.final.ipynb
                                       # Original project notebook
 ```
 
