@@ -33,20 +33,17 @@ class PatientData(BaseModel):
     s5: float = Field(..., allow_inf_nan=False)
     s6: float = Field(..., allow_inf_nan=False)
 
-
 @app.get("/health")
 def health():
     if model is None:
-        raise HTTPException(status_code=503, detail="The model is unavailable; run train.py first")
-    return {"status": "ok", "model_loaded": True}
-
+        raise HTTPException(status_code=503, detail="The model is unavailable")
+    return {"status": "ok"}
 
 @app.get("/model-info")
 def model_info():
     if model is None:
         raise HTTPException(status_code=503, detail="The model is unavailable; run train.py first")
     return {"model_name": MODEL_NAME, "model_alias": MODEL_ALIAS, "model_type": "LinearRegression"}
-
 
 @app.post("/predict")
 def predict(data: PatientData):
